@@ -8,34 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @import GoogleSignIn;
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 
-@interface RDLoginVC : UIViewController <UITextViewDelegate,UITextFieldDelegate,UIScrollViewDelegate,GIDSignInUIDelegate,FBSDKLoginButtonDelegate>
-{
-    UITextField *emailTextField;
-    
-    UITextField *passwordTextField;
-    
-    
-    
-    NSString *transitionFrom;
-    
-    UIImage * image;
-    
-}
+@interface RDLoginVC : UIViewController <GIDSignInUIDelegate,GIDSignInDelegate>
 
-@property (nonatomic,strong) UITextField *emailTextField;
-
-@property (nonatomic,strong) UITextField *passwordTextField;
-
-
-
-@property (nonatomic,strong) NSString *transitionFrom;
-
-@property (nonatomic,strong) UIButton * signInButton;
-
-@property (nonatomic,strong) UIImage * image;
 
 @end
 

@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Firebase/Firebase.h>
 
 
@@ -15,7 +14,7 @@
 @interface ViewController ()
 {
     BOOL chargeButtonAdded;
-   UIActivityIndicatorView * spinner;
+    UIActivityIndicatorView * spinner;
     NSString *uuid;
     UIButton *  chargeButton;
 }
@@ -134,19 +133,17 @@
         {
             [self showError:error];
         }
-
     }];
     
     [[[[[[ref child:@"stripe_customers"] child:user.uid]   child:@"charges"] child:uuid] child:@"status"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSLog(@"succeeded %@",snapshot.value);
-        if ([@"succeeded" isEqualToString:snapshot.value]) {
-          
+        if ([@"succeeded" isEqualToString:snapshot.value])
+        {
             [self showSuccess];
         }
         else
         {
             NSLog(@"%@", snapshot.value);
-           
         }
     } withCancelBlock:^(NSError * _Nonnull error) {
         NSLog(@"%@", error.localizedDescription);
@@ -171,12 +168,6 @@
     
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 @end

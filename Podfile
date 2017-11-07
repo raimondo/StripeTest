@@ -7,5 +7,4 @@ pod 'Stripe'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'GoogleSignIn'
-pod 'FBSDKLoginKit'
 end
