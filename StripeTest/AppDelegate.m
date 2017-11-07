@@ -8,6 +8,15 @@
 
 #import "AppDelegate.h"
 
+#import "RDLoginVC.h"
+#import <Firebase/Firebase.h>
+@import FirebaseInstanceID;
+@import GoogleSignIn;
+#import <Stripe/Stripe.h>
+#import "ViewController.h"
+
+
+
 @interface AppDelegate ()
 
 @end
@@ -16,7 +25,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+     [FIRApp configure];
+    [GIDSignIn sharedInstance].clientID = [FIRApp defaultApp].options.clientID;
+    [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_test_MmEZXkddStGFJtMRahNDUUz6"];
+    
+    UIViewController * vC;
+    if (   ! [[NSUserDefaults standardUserDefaults] objectForKey:@"email"])
+    {
+          vC = [[RDLoginVC alloc]init];
+    }
+    else
+    {
+       vC = [[ViewController alloc]init];
+    }
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:vC];
+    self.window.rootViewController = navVC;
     return YES;
 }
 

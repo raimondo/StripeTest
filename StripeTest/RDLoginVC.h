@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RDCart.h"
-#import "RDModalVC.h"
 @import GoogleSignIn;
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
@@ -19,9 +17,7 @@
     
     UITextField *passwordTextField;
     
-    BOOL isCollect;
     
-    RDCart *cart;
     
     NSString *transitionFrom;
     
@@ -33,9 +29,7 @@
 
 @property (nonatomic,strong) UITextField *passwordTextField;
 
-@property (nonatomic) BOOL isCollect;
 
-@property (nonatomic,strong) RDCart *cart;
 
 @property (nonatomic,strong) NSString *transitionFrom;
 

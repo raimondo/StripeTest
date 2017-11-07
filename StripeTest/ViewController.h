@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Stripe/Stripe.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <STPPaymentCardTextFieldDelegate>
 
 
 @end

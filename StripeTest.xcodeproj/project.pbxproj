@@ -14,6 +14,9 @@
 		718AAF261FB1AD0300CA0D1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 718AAF251FB1AD0300CA0D1B /* Assets.xcassets */; };
 		718AAF291FB1AD0300CA0D1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718AAF271FB1AD0300CA0D1B /* LaunchScreen.storyboard */; };
 		718AAF2C1FB1AD0300CA0D1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF2B1FB1AD0300CA0D1B /* main.m */; };
+		718AAF381FB1B82700CA0D1B /* RDLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF361FB1B82600CA0D1B /* RDLoginVC.m */; };
+		718AAF3B1FB1B9D500CA0D1B /* RDActivityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF391FB1B9D300CA0D1B /* RDActivityButton.m */; };
+		718AAF411FB1DEFB00CA0D1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 718AAF401FB1DEFB00CA0D1B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,11 @@
 		718AAF281FB1AD0300CA0D1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		718AAF2A1FB1AD0300CA0D1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		718AAF2B1FB1AD0300CA0D1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		718AAF361FB1B82600CA0D1B /* RDLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDLoginVC.m; sourceTree = "<group>"; };
+		718AAF371FB1B82600CA0D1B /* RDLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDLoginVC.h; sourceTree = "<group>"; };
+		718AAF391FB1B9D300CA0D1B /* RDActivityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDActivityButton.m; sourceTree = "<group>"; };
+		718AAF3A1FB1B9D500CA0D1B /* RDActivityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDActivityButton.h; sourceTree = "<group>"; };
+		718AAF401FB1DEFB00CA0D1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7A53B1A75382090834EE955 /* Pods-StripeTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StripeTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,11 +86,16 @@
 				718AAF1D1FB1AD0300CA0D1B /* AppDelegate.m */,
 				718AAF1F1FB1AD0300CA0D1B /* ViewController.h */,
 				718AAF201FB1AD0300CA0D1B /* ViewController.m */,
+				718AAF371FB1B82600CA0D1B /* RDLoginVC.h */,
+				718AAF361FB1B82600CA0D1B /* RDLoginVC.m */,
+				718AAF3A1FB1B9D500CA0D1B /* RDActivityButton.h */,
+				718AAF391FB1B9D300CA0D1B /* RDActivityButton.m */,
 				718AAF221FB1AD0300CA0D1B /* Main.storyboard */,
 				718AAF251FB1AD0300CA0D1B /* Assets.xcassets */,
 				718AAF271FB1AD0300CA0D1B /* LaunchScreen.storyboard */,
 				718AAF2A1FB1AD0300CA0D1B /* Info.plist */,
 				718AAF2B1FB1AD0300CA0D1B /* main.m */,
+				718AAF401FB1DEFB00CA0D1B /* GoogleService-Info.plist */,
 			);
 			path = StripeTest;
 			sourceTree = "<group>";
@@ -156,6 +169,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718AAF411FB1DEFB00CA0D1B /* GoogleService-Info.plist in Resources */,
 				718AAF291FB1AD0300CA0D1B /* LaunchScreen.storyboard in Resources */,
 				718AAF261FB1AD0300CA0D1B /* Assets.xcassets in Resources */,
 				718AAF241FB1AD0300CA0D1B /* Main.storyboard in Resources */,
@@ -175,7 +189,7 @@
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/Stripe/Stripe.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/Stripe/Stripe.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -228,6 +242,8 @@
 			files = (
 				718AAF211FB1AD0300CA0D1B /* ViewController.m in Sources */,
 				718AAF2C1FB1AD0300CA0D1B /* main.m in Sources */,
+				718AAF381FB1B82700CA0D1B /* RDLoginVC.m in Sources */,
+				718AAF3B1FB1B9D500CA0D1B /* RDActivityButton.m in Sources */,
 				718AAF1E1FB1AD0300CA0D1B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
