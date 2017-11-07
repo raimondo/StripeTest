@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>643196148174-o9apichsjsba61ohf7nos4k1steqfeqn.apps.googleusercontent.com</string>
+	<string>203501317932-pc5b0uqj6viqp9asbcu5n41c45i95dg8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.643196148174-o9apichsjsba61ohf7nos4k1steqfeqn</string>
+	<string>com.googleusercontent.apps.203501317932-pc5b0uqj6viqp9asbcu5n41c45i95dg8</string>
 	<key>API_KEY</key>
-	<string>AIzaSyByjHnFOtCJ78Mu-0bhlMk_BRDNXdtEYSU</string>
+	<string>AIzaSyAjz2RxD0drgVf0lwd308G8nuezIqsHKs0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>643196148174</string>
+	<string>203501317932</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.easeAppSoftware.StripeTest</string>
 	<key>PROJECT_ID</key>
-	<string>testapp-f5b87</string>
+	<string>shop-delivery</string>
 	<key>STORAGE_BUCKET</key>
-	<string>testapp-f5b87.appspot.com</string>
+	<string>shop-delivery.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:643196148174:ios:586a09d2d9037484</string>
+	<string>1:203501317932:ios:586a09d2d9037484</string>
 	<key>DATABASE_URL</key>
-	<string>https://testapp-f5b87.firebaseio.com</string>
+	<string>https://shop-delivery.firebaseio.com</string>
 </dict>
 </plist>
