@@ -93,7 +93,7 @@
     
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
         if (token == nil || error != nil) {
-            // Present error to user...
+             [self showError:error];
             return;
         }
         FIRUser *user = [FIRAuth auth].currentUser;
