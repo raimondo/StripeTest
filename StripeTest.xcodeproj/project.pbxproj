@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A5240D8B881FF1BEAD0DB8C /* libPods-StripeTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0343EAD3D6B25BFC918F5D89 /* libPods-StripeTest.a */; };
 		718AAF1E1FB1AD0300CA0D1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF1D1FB1AD0300CA0D1B /* AppDelegate.m */; };
 		718AAF211FB1AD0300CA0D1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF201FB1AD0300CA0D1B /* ViewController.m */; };
 		718AAF241FB1AD0300CA0D1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718AAF221FB1AD0300CA0D1B /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00C74D748A39814EFC14375A /* Pods-StripeTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StripeTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest.release.xcconfig"; sourceTree = "<group>"; };
+		0343EAD3D6B25BFC918F5D89 /* libPods-StripeTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StripeTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		718AAF191FB1AD0300CA0D1B /* StripeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StripeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		718AAF1C1FB1AD0300CA0D1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		718AAF1D1FB1AD0300CA0D1B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		718AAF281FB1AD0300CA0D1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		718AAF2A1FB1AD0300CA0D1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		718AAF2B1FB1AD0300CA0D1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D7A53B1A75382090834EE955 /* Pods-StripeTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StripeTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5240D8B881FF1BEAD0DB8C /* libPods-StripeTest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D4A3AEC788FC3F7E83FBC95 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7A53B1A75382090834EE955 /* Pods-StripeTest.debug.xcconfig */,
+				00C74D748A39814EFC14375A /* Pods-StripeTest.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		718AAF101FB1AD0300CA0D1B = {
 			isa = PBXGroup;
 			children = (
 				718AAF1B1FB1AD0300CA0D1B /* StripeTest */,
 				718AAF1A1FB1AD0300CA0D1B /* Products */,
+				6D4A3AEC788FC3F7E83FBC95 /* Pods */,
+				72A78365C093D89FD3C9EFA8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +87,14 @@
 			path = StripeTest;
 			sourceTree = "<group>";
 		};
+		72A78365C093D89FD3C9EFA8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0343EAD3D6B25BFC918F5D89 /* libPods-StripeTest.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,9 +102,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 718AAF2F1FB1AD0300CA0D1B /* Build configuration list for PBXNativeTarget "StripeTest" */;
 			buildPhases = (
+				FE11F9CE2967FC7BCD20FAE5 /* [CP] Check Pods Manifest.lock */,
 				718AAF151FB1AD0300CA0D1B /* Sources */,
 				718AAF161FB1AD0300CA0D1B /* Frameworks */,
 				718AAF171FB1AD0300CA0D1B /* Resources */,
+				2703F6B17EBF99CA320445FF /* [CP] Embed Pods Frameworks */,
+				26CE414A219C0FF5951B066D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,6 +163,63 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26CE414A219C0FF5951B066D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/Stripe/Stripe.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2703F6B17EBF99CA320445FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE11F9CE2967FC7BCD20FAE5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StripeTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		718AAF151FB1AD0300CA0D1B /* Sources */ = {
@@ -276,6 +360,7 @@
 		};
 		718AAF301FB1AD0300CA0D1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7A53B1A75382090834EE955 /* Pods-StripeTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -290,6 +375,7 @@
 		};
 		718AAF311FB1AD0300CA0D1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00C74D748A39814EFC14375A /* Pods-StripeTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
