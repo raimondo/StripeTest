@@ -141,14 +141,14 @@
     FIRDatabaseReference *  ref = [[FIRDatabase database] reference];
     FIRUser *user = [FIRAuth auth].currentUser;
     
-     [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"peach"] child:@"status"]  setValue:checkoutID withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+     [[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"payment"]   setValue:checkoutID withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
         if (error)
             [self showError:error];
     }];
     
     
 
-    [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"peach"] child:@"status"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"payment"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSLog(@"snapshot.value %@",snapshot.value);
         if (![snapshot.value isKindOfClass:[NSNull class]])
         {
@@ -231,7 +231,7 @@
         }];
         
         
-        [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"peach"] child:@"id"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"checkout"]  child:@"id"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             NSLog(@"snapshot.value %@",snapshot.value);
             if (![snapshot.value isKindOfClass:[NSNull class]])
             {
