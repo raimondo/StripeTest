@@ -25,6 +25,18 @@
 			<array>
 				<string>com.googleusercontent.apps.203501317932-pc5b0uqj6viqp9asbcu5n41c45i95dg8</string>
 			</array>
+			<key>LSApplicationQueriesSchemes</key>
+			<array>
+				<string>com.easeAppSoftware.StripeTest.payments</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.easeAppSoftware.StripeTest.payments</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>

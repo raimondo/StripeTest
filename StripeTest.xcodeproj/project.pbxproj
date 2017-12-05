@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1A5240D8B881FF1BEAD0DB8C /* libPods-StripeTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0343EAD3D6B25BFC918F5D89 /* libPods-StripeTest.a */; };
+		7125D6B41FD295C30078F485 /* mobile.connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7125D6B31FD295C30078F485 /* mobile.connect.framework */; };
+		7125D6B61FD295E00078F485 /* mobile.connect-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7125D6B51FD295E00078F485 /* mobile.connect-resources.bundle */; };
+		7125D6C21FD62AF10078F485 /* OPPWAMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7125D6C11FD62AF10078F485 /* OPPWAMobile.framework */; };
+		7125D6C41FD62B1B0078F485 /* OPPWAMobile-Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7125D6C31FD62B1B0078F485 /* OPPWAMobile-Resources.bundle */; };
 		718AAF1E1FB1AD0300CA0D1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF1D1FB1AD0300CA0D1B /* AppDelegate.m */; };
 		718AAF211FB1AD0300CA0D1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF201FB1AD0300CA0D1B /* ViewController.m */; };
 		718AAF241FB1AD0300CA0D1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 718AAF221FB1AD0300CA0D1B /* Main.storyboard */; };
@@ -22,6 +26,12 @@
 /* Begin PBXFileReference section */
 		00C74D748A39814EFC14375A /* Pods-StripeTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StripeTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest.release.xcconfig"; sourceTree = "<group>"; };
 		0343EAD3D6B25BFC918F5D89 /* libPods-StripeTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StripeTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7125D6B31FD295C30078F485 /* mobile.connect.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mobile.connect.framework; sourceTree = "<group>"; };
+		7125D6B51FD295E00078F485 /* mobile.connect-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "mobile.connect-resources.bundle"; sourceTree = "<group>"; };
+		7125D6B71FD296830078F485 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7125D6B81FD296AB0078F485 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7125D6C11FD62AF10078F485 /* OPPWAMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OPPWAMobile.framework; sourceTree = "<group>"; };
+		7125D6C31FD62B1B0078F485 /* OPPWAMobile-Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "OPPWAMobile-Resources.bundle"; sourceTree = "<group>"; };
 		718AAF191FB1AD0300CA0D1B /* StripeTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StripeTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		718AAF1C1FB1AD0300CA0D1B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		718AAF1D1FB1AD0300CA0D1B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -45,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7125D6B41FD295C30078F485 /* mobile.connect.framework in Frameworks */,
+				7125D6C21FD62AF10078F485 /* OPPWAMobile.framework in Frameworks */,
 				1A5240D8B881FF1BEAD0DB8C /* libPods-StripeTest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,6 +115,12 @@
 		72A78365C093D89FD3C9EFA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7125D6C31FD62B1B0078F485 /* OPPWAMobile-Resources.bundle */,
+				7125D6C11FD62AF10078F485 /* OPPWAMobile.framework */,
+				7125D6B81FD296AB0078F485 /* SystemConfiguration.framework */,
+				7125D6B71FD296830078F485 /* Security.framework */,
+				7125D6B51FD295E00078F485 /* mobile.connect-resources.bundle */,
+				7125D6B31FD295C30078F485 /* mobile.connect.framework */,
 				0343EAD3D6B25BFC918F5D89 /* libPods-StripeTest.a */,
 			);
 			name = Frameworks;
@@ -173,6 +191,8 @@
 				718AAF291FB1AD0300CA0D1B /* LaunchScreen.storyboard in Resources */,
 				718AAF261FB1AD0300CA0D1B /* Assets.xcassets in Resources */,
 				718AAF241FB1AD0300CA0D1B /* Main.storyboard in Resources */,
+				7125D6B61FD295E00078F485 /* mobile.connect-resources.bundle in Resources */,
+				7125D6C41FD62B1B0078F485 /* OPPWAMobile-Resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +208,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest-resources.sh",
 				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/Stripe/Stripe.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/Stripe/Stripe.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -380,7 +400,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H2QT6QRK39;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StripeTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.easeAppSoftware.StripeTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -395,7 +420,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H2QT6QRK39;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StripeTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.easeAppSoftware.StripeTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";

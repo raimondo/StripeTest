@@ -71,5 +71,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
+    if ([url.scheme caseInsensitiveCompare:@"com.easeAppSoftware.StripeTest.payments"] == NSOrderedSame) {
+        // send notification to get payment status
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 
 @end
