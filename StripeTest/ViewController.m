@@ -10,6 +10,7 @@
 #import <Firebase/Firebase.h>
 #import <mobile.connect/mobile.connect.h>
 #import <OPPWAMobile/OPPWAMobile.h>
+#import "MDWebViewVC.h"
 
 
 
@@ -20,6 +21,9 @@
     NSString *uuid;
     UIButton *  chargeButton;
     STPCardParams *cardParams;
+    NSString * userID;
+    NSString * displayName;;
+    
 }
 
 @property(nonatomic,strong) STPPaymentCardTextField * chargeTextField;
@@ -31,9 +35,23 @@
 @end
 
 @implementation ViewController
+{
+    NSString * tokenString;
+    BOOL isSubmitting;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    FIRUser *user = [FIRAuth auth].currentUser;
+    
+    userID = user.uid;
+    if (!userID) {
+        userID = @"jqBklLLOV8ch29M1gGRmGBBsGnt2";
+        displayName = @"Ray De Rose";
+    }
+    
+    
     STPPaymentCardTextField * cardVC = [[STPPaymentCardTextField alloc]initWithFrame:CGRectMake(30,200, [UIScreen mainScreen].bounds.size.width-60, 50)];
     cardVC.textColor = [UIColor whiteColor];
     cardVC.delegate = self;
@@ -64,15 +82,16 @@
     chargeButton.hidden = YES;
     
     self.provider = [OPPPaymentProvider paymentProviderWithMode:OPPProviderModeTest];
-
-
+    //    self.provider = [OPPPaymentProvider paymentProviderWithMode:OPPProviderModeLive];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitPaymentFrom3ds) name: @"submitPaymentFrom3ds" object:nil];
+    
 }
 
-
-
-
-
-
+-(void)submitPaymentFrom3ds
+{
+    [self requestStatus:tokenString];
+}
 
 - (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField
 {
@@ -93,16 +112,44 @@
     _chargeTextField = textField;
 }
 
+-(NSString*)formatMonth:(NSUInteger)mon
+{
+    int monthInt = (int)mon;
+    return  (monthInt <10)?[NSString stringWithFormat:@"0%d",monthInt]:[NSString stringWithFormat:@"%d",monthInt];
+}
+
+-(NSString*)formatCardType:(NSString*)number
+{
+    
+    NSString *firstChar =[number substringToIndex:1];
+    if ([firstChar isEqualToString:@"4"]) {
+        return @"VISA";
+    }
+    else
+        if ([firstChar isEqualToString:@"5"]) {
+            return @"MASTER";
+        }
+        else
+            if ([firstChar isEqualToString:@"3"]) {
+                return @"AMEX";
+            }
+    return @"";
+    
+    
+}
+
 
 -(OPPCardPaymentParams*)validateShopperDetails:(NSString*)checkoutID :(STPCardParams *)cardParams
 {
     NSError *error = nil;
-     FIRUser *user = [FIRAuth auth].currentUser;
+    FIRUser *user = [FIRAuth auth].currentUser;
     OPPCardPaymentParams *params = [OPPCardPaymentParams cardPaymentParamsWithCheckoutID:checkoutID
-                                                                            paymentBrand:@"VISA"
+                                                                            paymentBrand:[self formatCardType:cardParams.number]
                                                                                   holder:user.displayName
+                                    // holder:displayName
                                                                                   number:cardParams.number
-                                                                             expiryMonth:[NSString stringWithFormat:@"%lu", (unsigned long)cardParams.expMonth ]
+                                                                             expiryMonth:[self formatMonth:cardParams.expMonth]
+                                    //                                                                             expiryMonth:[NSString stringWithFormat:@"%lu", (unsigned long)cardParams.expMonth ]
                                                                               expiryYear:[NSString stringWithFormat:@"20%lu", (unsigned long)cardParams.expYear ]
                                                                                      CVV:cardParams.cvc
                                                                                    error:&error];
@@ -120,135 +167,158 @@
     OPPTransaction *transaction = [OPPTransaction transactionWithPaymentParams:[self validateShopperDetails:checkoutID :(STPCardParams *)cardParams ]];
     
     [self.provider submitTransaction:transaction completionHandler:^(OPPTransaction * _Nonnull transaction, NSError * _Nullable error) {
-        if (transaction.type == OPPTransactionTypeAsynchronous) {
+        if (transaction.type == OPPTransactionTypeAsynchronous)
+        {
+            if(![[self.navigationController.viewControllers lastObject]isKindOfClass:[MDWebViewVC class]])
+            {
+                MDWebViewVC *webVC = [[MDWebViewVC alloc]initWithUrl:transaction.redirectURL];
+                [self.navigationController pushViewController:webVC animated:YES];
+            }
+            
             // Open transaction.redirectURL in Safari browser to complete the transaction
         }  else if (transaction.type == OPPTransactionTypeSynchronous) {
             // Send request to your server to obtain transaction status
             NSLog(@"Send request to your server to obtain transaction status");
             [self requestStatus:checkoutID];
-
+            
         } else {
             // Handle the error
-                NSLog(@"submitTransaction error> %@",error);
+            NSLog(@"submitTransaction error> %@",error);
+            [self showError:error];
+            isSubmitting = NO;
         }
+        
     }];
+    
+    // }
 }
+
+
+//-(void)requestStatus
+//{
+//    [self.provider requestCheckoutInfoWithCheckoutID:tokenString completionHandler:^(OPPCheckoutInfo * _Nullable checkoutInfo, NSError * _Nullable error) {
+//        if (error) {
+//            // Handle error
+//        } else {
+//            // Use checkoutInfo.resourcePath for getting transaction status
+//            NSLog(@"requestStatus checkoutInfo response %@",checkoutInfo);
+//        }
+//    }];
+//}
 
 
 -(void)requestStatus :(NSString*)checkoutID
 {
-//    /payments/${userId}/${paymentId}/peach/status`
     FIRDatabaseReference *  ref = [[FIRDatabase database] reference];
     FIRUser *user = [FIRAuth auth].currentUser;
     
-     [[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"payment"]   setValue:checkoutID withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+    [[[[[ref child:@"payments"] child:userID]  child:uuid] child:@"payment"]   setValue:checkoutID withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        //     [[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"payment"]   setValue:checkoutID withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
         if (error)
             [self showError:error];
     }];
     
     
+    [[[[[ref child:@"payments"] child:userID]  child:uuid] child:@"payment"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        //    [[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"payment"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSLog(@"requestStatus response %@",snapshot.value);
+        if ([snapshot.value isKindOfClass:[NSDictionary class]])
+        {
+            isSubmitting = NO;
+            NSDictionary * response = snapshot.value;
+            if (response[@"result"]) {
+                NSDictionary *result = response[@"result"];
+                if (result[@"code"]) {
+                    NSString * code = result[@"code"];
+                    if ([code isEqualToString:@"000.100.110"]) {
+                        [self showSuccess];
+                    }else
+                        if ([code isEqualToString:@"000.200.000"]) {
+                            [self showPending];
+                            
+                        }
+                        else
+                            if ([code isEqualToString:@"600.200.500"]|| [code isEqualToString:@"800.100.100"]) {
+                                [self showDeclined:result[@"description"]];
+                            }
+                }
+            }
+        }
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+        [self showError:error];
+    }];
+    
+    // [self requestStatus];
+}
 
-    [[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"payment"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        NSLog(@"snapshot.value %@",snapshot.value);
+
+-(void)submitPressed
+{
+    
+    [spinner startAnimating];
+    uuid = [[NSUUID UUID] UUIDString];
+    cardParams = [[STPCardParams alloc] init];
+    
+    cardParams.number = _chargeTextField.cardNumber;
+    cardParams.expMonth = _chargeTextField.expirationMonth;
+    cardParams.expYear = _chargeTextField.expirationYear;
+    cardParams.cvc = _chargeTextField.cvc;
+    
+    FIRUser *user = [FIRAuth auth].currentUser;
+    NSLog(@"user.uid %@",user.uid);
+    FIRDatabaseReference *  ref = [[FIRDatabase database] reference];
+    
+    NSString *key = [NSString stringWithFormat:@"%@/%@", userID,uuid];
+    //        NSString *key = [NSString stringWithFormat:@"%@/%@", user.uid,uuid];
+    NSDictionary *post = @{
+                           @"amount": [NSString stringWithFormat:@"%.2f",500.10]
+                           };
+    
+    NSDictionary *childUpdates = @{[@"/payments/" stringByAppendingString:key]: post};
+    [ref updateChildValues:childUpdates];
+    
+    [[[[[[ref child:@"payments"] child:userID]  child:uuid] child:@"checkout"] child:@"result"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        //        [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"checkout"] child:@"result"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSLog(@"submitPressed result response %@",snapshot.value);
+        if ([snapshot.value isKindOfClass:[NSDictionary class]])
+        {
+            NSDictionary * result = snapshot.value;
+            if ([result[@"code"] isEqualToString: @"200.300.404"]) {
+                [self showDeclined:result[@"description"]];
+            }
+        }
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+        [self showError:error];
+    }];
+    
+    
+    [[[[[[ref child:@"payments"] child:userID]  child:uuid] child:@"checkout"]  child:@"id"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        //        [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"checkout"]  child:@"id"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSLog(@"submitPressed response %@",snapshot.value);
         if (![snapshot.value isKindOfClass:[NSNull class]])
         {
             // [self peachSubmit:cardParams
             //                 :snapshot.value];
             
-           // [self submitTransaction:snapshot.value :cardParams];
+            tokenString = snapshot.value;
+            
+            [self submitTransaction:snapshot.value :cardParams];
             
         }
     } withCancelBlock:^(NSError * _Nonnull error) {
         NSLog(@"%@", error.localizedDescription);
         [self showError:error];
     }];
+    
+    
+    //    }];
 }
 
 
 
-
-
-
-
--(void)submitPressed
-{
-    [spinner startAnimating];
-    uuid = [[NSUUID UUID] UUIDString];
-    cardParams = [[STPCardParams alloc] init];
-   
-    cardParams.number = _chargeTextField.cardNumber;
-    cardParams.expMonth = _chargeTextField.expirationMonth;
-    cardParams.expYear = _chargeTextField.expirationYear;
-    cardParams.cvc = _chargeTextField.cvc;
-    
-    
-    [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
-        if (token == nil || error != nil) {
-             [self showError:error];
-            return;
-        }
-        FIRUser *user = [FIRAuth auth].currentUser;
-        NSLog(@"token>>> %@",token);
-        NSLog(@"user.uid %@",user.uid);
-        FIRDatabaseReference *  ref = [[FIRDatabase database] reference];
-        
-        [[[[ref child:@"users"] child:user.uid] child:@"balance"] setValue:[NSNumber numberWithDouble:0] withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
-            if (error)
-                [self showError:error];
-        }];
-        
-        NSString *key = [NSString stringWithFormat:@"%@/%@", user.uid,uuid];
-        NSDictionary *post = @{@"token": token.tokenId,
-                               @"amount": [NSNumber numberWithDouble:5000]
-                               };
-       
-        NSDictionary *childUpdates = @{[@"/payments/" stringByAppendingString:key]: post};
-        [ref updateChildValues:childUpdates];
-        
-        [[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"error"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            NSLog(@"snapshot.value %@",snapshot.value);
-            if (![snapshot.value isKindOfClass:[NSNull class]])
-            {
-                [self showDeclined:snapshot.value];
-            }
-        } withCancelBlock:^(NSError * _Nonnull error) {
-            NSLog(@"%@", error.localizedDescription);
-            [self showError:error];
-        }];
-        
-        [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"charge"] child:@"status"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            NSLog(@"snapshot.value %@",snapshot.value);
-            if (![snapshot.value isKindOfClass:[NSNull class]])
-            {
-                if ([@"succeeded" isEqualToString:snapshot.value])
-                {
-                    [self showSuccess];
-                }
-            }
-        } withCancelBlock:^(NSError * _Nonnull error) {
-            NSLog(@"%@", error.localizedDescription);
-            [self showError:error];
-        }];
-        
-        
-        [[[[[[ref child:@"payments"] child:user.uid]  child:uuid] child:@"checkout"]  child:@"id"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            NSLog(@"snapshot.value %@",snapshot.value);
-            if (![snapshot.value isKindOfClass:[NSNull class]])
-            {
-               // [self peachSubmit:cardParams
-                //                 :snapshot.value];
-                
-                [self submitTransaction:snapshot.value :cardParams];
-
-            }
-        } withCancelBlock:^(NSError * _Nonnull error) {
-            NSLog(@"%@", error.localizedDescription);
-            [self showError:error];
-        }];
-        
-        
-    }];
-}
 
 
 
@@ -269,6 +339,14 @@
 }
 
 
+-(void)showPending
+{
+    [spinner stopAnimating];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Credit Card" message:@"Pending" delegate:self cancelButtonTitle:nil otherButtonTitles: @"OK",nil];
+    [alert show];
+}
+
+
 -(void)showError:(NSError*)error
 {
     [spinner stopAnimating];
@@ -280,56 +358,6 @@
 
 
 
-//    OPPTransaction *transaction = [OPPTransaction transactionWithPaymentParams:params];
-//
-//    [self.provider submitTransaction:transaction completionHandler:^(OPPTransaction * _Nonnull transaction, NSError * _Nullable error) {
-//        if (transaction.type == OPPTransactionTypeAsynchronous) {
-//            // Open transaction.redirectURL in Safari browser to complete the transaction
-//        }  else if (transaction.type == OPPTransactionTypeSynchronous) {
-//            // Send request to your server to obtain transaction status
-//        } else {
-//            // Handle the error
-//        }
-//    }];
-
-
-//-(void)peachSubmit:(STPCardParams *)cardParams :(NSString*)peachId
-//{
-////    self.provider = [OPPPaymentProvider paymentProviderWithMode:OPPProviderModeTest];
-//
-//    NSString *applicationIdentifier = @"com.easeAppSoftware.StripeTest";        // Default value
-//    NSString *profileToken = @"5644a34583fc49da87892843aa8fb27b";
-//
-//      self.provider = [PWPaymentProvider getProviderWithApplicationId: applicationIdentifier profileToken:peachId];
-//
-//    NSError *error;
-//    PWPaymentParams *ccParams = [_provider.paymentParamsFactory
-//                                 createCreditCardPaymentParamsWithAmount:5.0
-//                                 currency:EUR
-//                                 subject:@"A test charge"
-//                                 ccNumber:cardParams.number
-//                                 name:@"Ray"
-//                                 expiryYear:@"2019"
-//                                 expiryMonth:[NSString stringWithFormat:@"%lu", (unsigned long)cardParams.expMonth ]
-//                                 CVV:cardParams.cvc
-//                                 latitude:0
-//                                 longitude:0
-//                                 horizontalAccuracy:0
-//                                 error:&error];
-//
-//    NSLog(@"ccParams %@",ccParams);
-//    NSLog(@"error> %@",error);
-//
-//    [_provider queryTransactionStatusForTransaction:peachId onSuccessfulQuery:^(PWTransactionStatus lastSuccess) {
-//        NSLog(@"lastSuccess %d",lastSuccess);
-//    } onQueryFailure:^(NSError *error) {
-//        NSLog(@"error>> %@",error);
-//
-//    }];
-//
-//
-//
-//}
 
 
 

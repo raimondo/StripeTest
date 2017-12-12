@@ -21,6 +21,7 @@
 		718AAF381FB1B82700CA0D1B /* RDLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF361FB1B82600CA0D1B /* RDLoginVC.m */; };
 		718AAF3B1FB1B9D500CA0D1B /* RDActivityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 718AAF391FB1B9D300CA0D1B /* RDActivityButton.m */; };
 		718AAF411FB1DEFB00CA0D1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 718AAF401FB1DEFB00CA0D1B /* GoogleService-Info.plist */; };
+		7198C3D81FD7AAE100B7AB0E /* MDWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7198C3D61FD7AAE100B7AB0E /* MDWebViewVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		718AAF391FB1B9D300CA0D1B /* RDActivityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDActivityButton.m; sourceTree = "<group>"; };
 		718AAF3A1FB1B9D500CA0D1B /* RDActivityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDActivityButton.h; sourceTree = "<group>"; };
 		718AAF401FB1DEFB00CA0D1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7198C3D61FD7AAE100B7AB0E /* MDWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDWebViewVC.m; sourceTree = "<group>"; };
+		7198C3D71FD7AAE100B7AB0E /* MDWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDWebViewVC.h; sourceTree = "<group>"; };
 		D7A53B1A75382090834EE955 /* Pods-StripeTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StripeTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StripeTest/Pods-StripeTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +105,8 @@
 				718AAF361FB1B82600CA0D1B /* RDLoginVC.m */,
 				718AAF3A1FB1B9D500CA0D1B /* RDActivityButton.h */,
 				718AAF391FB1B9D300CA0D1B /* RDActivityButton.m */,
+				7198C3D71FD7AAE100B7AB0E /* MDWebViewVC.h */,
+				7198C3D61FD7AAE100B7AB0E /* MDWebViewVC.m */,
 				718AAF221FB1AD0300CA0D1B /* Main.storyboard */,
 				718AAF251FB1AD0300CA0D1B /* Assets.xcassets */,
 				718AAF271FB1AD0300CA0D1B /* LaunchScreen.storyboard */,
@@ -262,6 +267,7 @@
 				718AAF211FB1AD0300CA0D1B /* ViewController.m in Sources */,
 				718AAF2C1FB1AD0300CA0D1B /* main.m in Sources */,
 				718AAF381FB1B82700CA0D1B /* RDLoginVC.m in Sources */,
+				7198C3D81FD7AAE100B7AB0E /* MDWebViewVC.m in Sources */,
 				718AAF3B1FB1B9D500CA0D1B /* RDActivityButton.m in Sources */,
 				718AAF1E1FB1AD0300CA0D1B /* AppDelegate.m in Sources */,
 			);

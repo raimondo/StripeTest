@@ -22,6 +22,10 @@
 @end
 
 @implementation AppDelegate
+{
+    UINavigationController *navVC ;
+    UIViewController * vC;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -30,16 +34,16 @@
     [GIDSignIn sharedInstance].clientID = [FIRApp defaultApp].options.clientID;
     [[STPPaymentConfiguration sharedConfiguration] setPublishableKey:@"pk_test_MmEZXkddStGFJtMRahNDUUz6"];
     
-    UIViewController * vC;
-    if (   ! [[NSUserDefaults standardUserDefaults] objectForKey:@"email"])
-    {
-          vC = [[RDLoginVC alloc]init];
-    }
-    else
-    {
+    
+//    if (   ! [[NSUserDefaults standardUserDefaults] objectForKey:@"email"])
+//    {
+//          vC = [[RDLoginVC alloc]init];
+//    }
+//    else
+//    {
        vC = [[ViewController alloc]init];
-    }
-    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:vC];
+   // }
+    navVC = [[UINavigationController alloc]initWithRootViewController:vC];
     self.window.rootViewController = navVC;
     return YES;
 }
@@ -72,8 +76,17 @@
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
+    
+    NSLog(@"url.scheme %@",url.scheme);
     if ([url.scheme caseInsensitiveCompare:@"com.easeAppSoftware.StripeTest.payments"] == NSOrderedSame) {
         // send notification to get payment status
+        
+      
+        [navVC popToViewController:vC animated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"submitPaymentFrom3ds"
+                                                            object:self
+                                                          userInfo:nil];
+        
         return YES;
     } else {
         return NO;
